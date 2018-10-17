@@ -111,6 +111,9 @@ workbox.setConfig({
   debug: true
 });
 workbox.precaching.precacheAndRoute(serviceWorkerOption.assets);
+workbox.precaching.addPlugins(new workbox.expiration.Plugin({
+  maxAgeSeconds: 24 * 60 * 60
+}));
 
 /***/ })
 
