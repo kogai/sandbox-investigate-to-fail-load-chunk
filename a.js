@@ -1,3 +1,5 @@
-export const f = (x) => {
- return x + 1 
+export const a = x => {
+  import(/* webpackChunkName: "b" */ "./b").then(({ b }) => {
+    return b(x) + b(x);
+  });
 };
