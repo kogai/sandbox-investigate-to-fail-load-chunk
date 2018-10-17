@@ -1,0 +1,35 @@
+{
+  "name": "sandbox-investigate-to-fail-load-chunk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "7.1.2",
+    "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-export-default-from": "7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/preset-react": "7.0.0",
+    "autoprefixer": "9.1.5",
+    "babel-loader": "8.0.4",
+    "clean-webpack-plugin": "0.1.19",
+    "css-loader": "1.0.0",
+    "mini-css-extract-plugin": "0.4.4",
+    "node-sass": "4.9.3",
+    "postcss-loader": "3.0.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "webpack": "4.19.1",
+    "webpack-bundle-analyzer": "3.0.2",
+    "webpack-cli": "3.1.2"
+  }
+}
