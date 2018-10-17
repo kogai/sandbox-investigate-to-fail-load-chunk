@@ -2,8 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoPrefixer = require("autoprefixer");
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const input = path.resolve(__dirname);
 const output = path.resolve(__dirname, "dist");
@@ -65,8 +67,7 @@ module.exports = {
   output: {
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].bundle.js",
-    path: output,
-    publicPath: "/client/"
+    path: output
   },
   devtool: "source-map",
   resolve: {
@@ -78,7 +79,13 @@ module.exports = {
     mainFields: ["main", "module"]
   },
   plugins: [
-    new CleanWebpackPlugin([output])
+    new CleanWebpackPlugin([output]),
+    new HtmlWebpackPlugin({
+      template: "./template.html"
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: './sw.js',
+    }),
     // new MiniCssExtractPlugin({
     //   filename: "[name].[hash].css",
     //   chunkFilename: "[name].[hash].css"

@@ -1,3 +1,3 @@
-export const b = x => {
+export const square = x => {
   return x * x;
 };

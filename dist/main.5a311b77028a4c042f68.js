@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"b":"b"}[chunkId]||chunkId) + "." + {"b":"8a5f5fc305b8f4d240fc"}[chunkId] + ".bundle.js"
+/******/ 		return __webpack_require__.p + "" + ({"my-b":"my-b"}[chunkId]||chunkId) + "." + {"my-b":"e5e2db243ac9640f3856"}[chunkId] + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -180,7 +180,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/client/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -203,20 +203,25 @@
 /*!**************!*\
   !*** ./a.js ***!
   \**************/
-/*! exports provided: a */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return a; });
+var root = document.querySelector("#root");
+navigator.serviceWorker.register("/sw.js");
+
 var a = function a(x) {
-  __webpack_require__.e(/*! import() | b */ "b").then(__webpack_require__.bind(null, /*! ./b */ "./b.js")).then(function (_ref) {
-    var b = _ref.b;
-    return b(x) + b(x);
+  return __webpack_require__.e(/*! import() | my-b */ "my-b").then(__webpack_require__.bind(null, /*! ./b */ "./b.js")).then(function (_ref) {
+    var square = _ref.square;
+    return "square(".concat(x, ") = ").concat(square(x));
   });
 };
+
+a(3).then(function (x) {
+  var node = document.createTextNode(x);
+  root.appendChild(node);
+});
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.1b05a7c5cdd7560ab6d4.js.map
+//# sourceMappingURL=main.5a311b77028a4c042f68.js.map
