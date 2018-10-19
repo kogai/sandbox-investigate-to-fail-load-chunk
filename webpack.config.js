@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoPrefixer = require("autoprefixer");
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require("serviceworker-webpack-plugin");
 
 const input = path.resolve(__dirname);
 const output = path.resolve(__dirname, "dist");
@@ -23,6 +23,28 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.png$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            minetype: "image/png",
+            limit: 2 ** 8,
+            name: "[path][name].[hash].[ext]",
+          }
+        }
+      },
+      {
+        test: /\.pdf$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            minetype: "application/pdf",
+            limit: 2 ** 8,
+            name: "[path][name].[hash].[ext]",
+          }
+        }
       }
       // {
       //   test: /\.scss$/,
@@ -84,8 +106,8 @@ module.exports = {
       template: "./template.html"
     }),
     new ServiceWorkerWebpackPlugin({
-      entry: './sw.js',
-    }),
+      entry: "./sw.js"
+    })
     // new MiniCssExtractPlugin({
     //   filename: "[name].[hash].css",
     //   chunkFilename: "[name].[hash].css"

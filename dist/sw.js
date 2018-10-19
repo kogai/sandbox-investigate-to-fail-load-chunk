@@ -1,6 +1,51 @@
 var serviceWorkerOption = {
   "assets": [
-    "/main.5a311b77028a4c042f68.js",
+    "/a/big.1.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.2.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.3.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.4.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.5.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.6.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.7.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.8.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/a/big.9.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.1.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.2.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.3.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.4.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.5.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.6.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.7.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.8.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/b/big.9.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.1.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.2.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.3.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.4.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.5.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.6.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.7.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.8.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/c/big.9.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.1.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.2.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.3.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.4.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.5.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.6.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.7.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.8.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/d/big.9.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.1.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.2.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.3.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.4.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.5.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.6.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.7.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.8.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/f/big.9.1fda0d39d3f1197ac5057383d4705dbd.pdf",
+    "/main.707108b4eda3c95758bf.js",
     "/my-b.e5e2db243ac9640f3856.bundle.js",
     "/index.html"
   ]
@@ -107,13 +152,24 @@ if (!workbox) {
   throw new Error("Workbox didn't import properly.");
 }
 
-workbox.setConfig({
-  debug: true
+var CACHE_VERSION = "v1";
+self.addEventListener("install", function (event) {
+  event.waitUntil(caches.open(CACHE_VERSION).then(function (cache) {
+    return cache.addAll(serviceWorkerOption.assets);
+  }));
 });
-workbox.precaching.precacheAndRoute(serviceWorkerOption.assets);
-workbox.precaching.addPlugins(new workbox.expiration.Plugin({
-  maxAgeSeconds: 24 * 60 * 60
-}));
+self.addEventListener("fetch", function (event) {
+  event.respondWith(caches.match(event.request).then(function (response) {
+    if (response) {
+      return response;
+    }
+
+    return fetch(event.request); // TODO 4 - Add fetched files to the cache
+  }).catch(function (error) {
+    // TODO 6 - Respond with custom offline page
+    console.log(error);
+  }));
+});
 
 /***/ })
 

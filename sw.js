@@ -6,10 +6,31 @@ if (!workbox) {
   throw new Error("Workbox didn't import properly.");
 }
 
-workbox.setConfig({ debug: true });
-workbox.precaching.precacheAndRoute(serviceWorkerOption.assets);
-workbox.precaching.addPlugins(
-  new workbox.expiration.Plugin({
-    maxAgeSeconds: 24 * 60 * 60,
-  })
-);
+const CACHE_VERSION = "v1";
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches
+      .open(CACHE_VERSION)
+      .then(cache => cache.addAll(serviceWorkerOption.assets)),
+  );
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches
+      .match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+        // TODO 4 - Add fetched files to the cache
+      })
+      .catch(error => {
+        // TODO 6 - Respond with custom offline page
+        console.log(error);
+      }),
+  );
+});
+
